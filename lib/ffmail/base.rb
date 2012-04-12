@@ -1,10 +1,14 @@
 module Ffmail
   class Base
-    include ActiveModel::AttributeMethods
     include ActiveModel::Conversion
     extend  ActiveModel::Naming
     extend  ActiveModel::Translation
     include ActiveModel::Validations
+    include ActiveModel::AttributeMethods
+    include Ffmail::Validators
+    extend  ActiveModel::Callbacks
+
+    define_model_callbacks :deliver
  
     class_attribute :_attributes
     self._attributes = []
@@ -27,6 +31,22 @@ module Ffmail
 
     def persisted?
       false
+    end
+
+    def deliver
+      if valid?
+        _run_deliver_callbacks do
+          Ffmail::Notifier.contact(self).deliver
+        end
+      else
+        false
+      end
+    end
+
+    def initialize(attributes = {})
+      attributes.each do |attr, value|
+        self.send("#{attr}=", value)
+      end unless attributes.blank?
     end
 
     protected
