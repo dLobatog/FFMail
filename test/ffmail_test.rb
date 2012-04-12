@@ -37,6 +37,5 @@ class FfmailTest < ActiveSupport::TestCase
     sample.email = "user@example.com"
     assert sample.email?
   end
-  
-  
+
 end
