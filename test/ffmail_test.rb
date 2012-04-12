@@ -21,5 +21,22 @@ class FfmailTest < ActiveSupport::TestCase
     sample.clear_email
     assert_nil sample.email
   end
+
+  test "sample mail can ask if an attribute is present or not" do
+    sample = SampleMail.new
+    assert !sample.name?
+    
+    sample.name = "User"
+    assert sample.name?
+    
+    assert !sample.email?
+
+    sample.email = ""
+    assert !sample.email?
+
+    sample.email = "user@example.com"
+    assert sample.email?
+  end
+  
   
 end
