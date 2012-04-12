@@ -33,7 +33,7 @@ c.deliver
 To install this gem, add the following line to your Gemfile:
 
 ```ruby
-gem 'rrpdf', :git => git://github.com/eLobato/RRPDF.git
+gem 'ffmail', :git => git://github.com/eLobato/RRPDF.git
 ```
 
 ## I18n
