@@ -4,6 +4,7 @@ module Ffmail
     include ActiveModel::Conversion
     extend  ActiveModel::Naming
     extend  ActiveModel::Translation
+    include ActiveModel::Validations
     
     attribute_method_prefix 'clear_'
     attribute_method_suffix '?'
